@@ -1,0 +1,41 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Product</li>
+  </ol>
+</nav>
+
+
+<div class="view-product p-5">
+  {{#each rows}}
+  <div class="row mb-5">
+    <div class="col text-center">
+      <h3>{{this.productName}}</h3>
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Serial ID</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Current State</th>
+            <th scope="col">Captured Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{this.serialID}}</th>
+            <td>{{this.productName}}</td>
+            <td>{{this.currentState}}</td>
+            <td>{{this.dateCaptured}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  {{/each}}
+
+  </div>

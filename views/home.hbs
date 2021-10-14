@@ -1,0 +1,47 @@
+
+
+<div class="row">
+<div class="col-md-6">Product Management</div>
+
+<div class="col-md-6 d-flex justify-content-end">
+
+  <a href="/addProduct" type="button" class="btn btn-primary align-self-center">Add User</a>
+</div>
+
+
+</div>
+
+
+<div class="container">
+  
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Serial Number</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Current State</th>
+      <th scope="col">Date Captured/Modified</th>
+      <th scope="col" class="text-end">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each rows}}
+    <tr>
+      <th scope="row">{{this.serialID}}</th>
+      <td>{{this.productName}}</td>
+      <td>{{this.currentState}}</td>
+      <td>{{this.dateCaptured}}</td>
+      <td class="text-end">
+
+<a href="/viewProduct/{{this.serialID}}" type="button" class="btn btn-primary btn-small"><i class="bi bi-eye">View</i></a>
+<a href="/editProduct/{{this.serialID}}" type="button" class="btn btn-info btn-small"><i class="bi bi-pencil">Edit</i></a>
+<a href="/{{this.serialID}}" type="button" class="btn btn-danger btn-small"><i class="bi bi-person-x">Delete</i></a>
+
+      </td>
+    </tr>
+    {{/each}}
+
+
+  </tbody>
+</table>
+</div>
