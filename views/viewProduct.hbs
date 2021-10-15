@@ -7,7 +7,7 @@
 
 
 <div class="view-product p-5">
-  {{#each rows}}
+  {{!-- {{#each rows}} --}}
   <div class="row mb-5">
     <div class="col text-center">
       <h3>{{this.productName}}</h3>
@@ -25,17 +25,28 @@
           </tr>
         </thead>
         <tbody>
+          {{#each rows}}
           <tr>
             <th scope="row">{{this.serialID}}</th>
             <td>{{this.productName}}</td>
             <td>{{this.currentState}}</td>
             <td>{{this.dateCaptured}}</td>
           </tr>
+          {{/each}}
+
+           <% for( let i = 0; i < products.length; i++ ) { %>
+                  <tr>
+                      <th scope="row"><%= products[i].serialID %></th>
+                      <td><%= Products[i].productName %> </td>
+                      <td><%= Products[i].currentState %></td>
+                      <td><%= Products[i].capturedDate%></td>
+                  </tr>
+              <% } %>
         </tbody>
       </table>
     </div>
     
   </div>
-  {{/each}}
+  {{!-- {{/each}} --}}
 
   </div>

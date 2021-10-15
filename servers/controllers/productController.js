@@ -28,7 +28,8 @@ connection.query('SELECT * FROM products',(err,rows)=>{
 
 connection.release();
 if(!err){
-    res.render('home',{rows})
+    let deletedProduct= req.query.removed;
+    res.render('home',{rows,deletedProduct})
 }
 else{
     console.log(err)
@@ -72,14 +73,11 @@ exports.formAdd=(req,res)=>{
 
 // Add new Products
 exports.create=(req,res)=>{
-    
 pool.getConnection((err,connection)=>{
     if(err) throw err;//nnot Connected
     console.log('Connected as ID '+connection.threadId);
 const {productName, currentState}=req.body;
 
-let searchTerm=req.body.search;
-//Use the cinnection
 ///query
 connection.query('INSERT INTO products SET productName = ?, currentState = ?',[productName,currentState],(err,rows)=>{
 //When the connection is done we need to release it
