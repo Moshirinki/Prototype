@@ -6,10 +6,6 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-
-// Parsing middle
-//Parse application/x-www-form-urlencoded
-
 app.use(express.urlencoded({extended:true}));
 
 
@@ -43,23 +39,5 @@ pool.getConnection((err,connection)=>{
 
 const routes =require('./servers/routes/product')
 app.use('/',routes);
-
-
-
-
-
-// Connection Pool
-// You don't need the connection here as we have it in userController
-// let connection = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASS,
-//   database: process.env.DB_NAME
-// });
- 
-
-// const routes = require('./server/routes/user');
-// app.use('/', routes);
-
 
 app.listen(port, () => console.log('Listening on port ',+port));
