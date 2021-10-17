@@ -1,13 +1,10 @@
 const express = require('express');
-const ejs = require('ejs');
 const exphbs = require('express-handlebars');
-
 const mqsql = require('mysql');
-
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 
 // Parsing middle
@@ -32,8 +29,9 @@ app.set('view engine', 'hbs');
 const pool =mqsql.createPool({
 connectionLimit:100,
 host           :process.env.DB_HOST,
-user:process.env.DB_USER,
-database:process.env.DB_NAME
+user           :process.env.DB_USER,
+password       :process.env.DB_PASSWORD,
+database       :process.env.DB_NAME
 });
 
 //connect to db

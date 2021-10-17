@@ -1,4 +1,4 @@
-const { render } = require('ejs');
+
 const mysql= require('mysql');
 
 
@@ -7,7 +7,8 @@ const pool =mysql.createPool({
 connectionLimit :100,
 host            :process.env.DB_HOST,
 user            :process.env.DB_USER,
-database        :process.env.DB_NAME
+database        :process.env.DB_NAME,
+password        :process.env.DB_PASSWORD
 });
 
 
@@ -65,6 +66,34 @@ exports.find=(req,res)=>{
 
 }
 
+
+// Find Products by Serial Number
+exports.findSerial=(req,res)=>{
+    pool.getConnection((err,connection)=>{
+        if(err) throw err;//nnot Connected
+        console.log('Connected as ID '+connection.threadId);
+    // 
+
+    let searched=req.body.searchSerial;
+    //Use the cinnection
+    ///query
+    connection.query('SELECT * FROM products WHERE serialNumber LIKE ?' ,['%' + searched + '%'],(err,rows)=>{
+    //When the connection is done we need to release it
+    
+    connection.release();
+    if(!err){
+        res.render('home',{rows})
+    }
+    else{
+        console.log(err)
+    } 
+    });
+    
+    });
+
+
+}
+
 // Rendering  Products Page
 exports.formAdd=(req,res)=>{
     
@@ -76,10 +105,10 @@ exports.create=(req,res)=>{
 pool.getConnection((err,connection)=>{
     if(err) throw err;//nnot Connected
     console.log('Connected as ID '+connection.threadId);
-const {productName, currentState}=req.body;
+const { serialNumber,productName, currentState}=req.body;
 
 ///query
-connection.query('INSERT INTO products SET productName = ?, currentState = ?',[productName,currentState],(err,rows)=>{
+connection.query('INSERT INTO products SET serialNumber = ?, productName = ?, currentState = ?',[serialNumber,productName,currentState],(err,rows)=>{
 //When the connection is done we need to release it
 
 connection.release(); 
@@ -98,7 +127,7 @@ exports.edit=(req,res)=>{
     pool.getConnection((err,connection)=>{
         if(err) throw err;//nnot Connected
         console.log('Connected as ID '+connection.threadId);
-    connection.query('SELECT * FROM products WHERE serialID = ?',[req.params.serialID],(err,rows)=>{
+    connection.query('SELECT * FROM products WHERE id = ?',[req.params.id],(err,rows)=>{
     connection.release();
     if(!err){
         res.render('editProduct',{rows})
@@ -121,7 +150,7 @@ const {productName,currentState}=req.body;
     //Use the cinnection
     
     ///query
-    connection.query('UPDATE products SET currentState = ? ',[currentState,req.params.serialID],(err,rows)=>{
+    connection.query('UPDATE products SET currentState = ? ',[currentState,req.params.id],(err,rows)=>{
     //When the connection is done we need to release it
     
     connection.release();
@@ -129,10 +158,10 @@ const {productName,currentState}=req.body;
         pool.getConnection((err,connection)=>{
             if(err) throw err;//nnot Connected
             console.log('Connected as ID '+connection.threadId);
-        connection.query('SELECT * FROM products WHERE serialID = ?',[req.params.serialID],(err,rows)=>{
+        connection.query('SELECT * FROM products WHERE id = ?',[req.params.id],(err,rows)=>{
         connection.release();
         if(!err){
-            res.render('editProduct',{rows,alert:`${productName} process Updated Successfully`})
+            res.render('editProduct',{rows,alert:`${productName} Process Updated Successfully`})
 
         }
         else{
@@ -153,7 +182,7 @@ exports.delete=(req,res)=>{
     pool.getConnection((err,connection)=>{
         if(err) throw err;//nnot Connected
         console.log('Connected as ID '+connection.threadId);
-    connection.query('DELETE FROM products WHERE serialID = ?',[req.params.serialID],(err,rows)=>{
+    connection.query('DELETE FROM products WHERE id = ?',[req.params.id],(err,rows)=>{
     connection.release();
     if(!err){
         let deletedProduct= encodeURIComponent('Product Successfully deleted')
@@ -176,7 +205,7 @@ pool.getConnection((err,connection)=>{
 //Use the cinnection
 
 ///query
-connection.query('SELECT * FROM products WHERE serialID = ?',[req.params.serialID],(err,rows)=>{
+connection.query('SELECT * FROM products WHERE id = ?',[req.params.id],(err,rows)=>{
 //When the connection is done we need to release it
 
 connection.release();

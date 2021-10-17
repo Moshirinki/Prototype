@@ -11,14 +11,28 @@
   <div class="col-md-6">
     <h3>Product Management</h3>
   </div>
-
+ 
   <div class="col-md-6 d-flex justify-content-left">
 
-    <a href="/addProduct" type="button" class="btn btn-primary align-self-center">Add User</a>
+    <a href="/addProduct" type="button" class="btn btn-primary align-self-center">Add New</a>
   </div>
 </div>
 
+<div class="row">
+<div class="col-md-6">
+  <form class="d-flex" method="post" action="/" novalidate>
+        <input class="form-control me-2" type="search" placeholder="Search by Serial Number" name="searchSerial" aria-label="Search">
+        <button class="btn btn-dark" type="submit">GO</button>
+      </form>
+</div>
 
+<div class="col-md-6">
+   <form class="d-flex" method="post" action="/" novalidate>
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+        <button class="btn btn-primary" type="submit">GO</button>
+      </form>
+</div>
+</div>
 <div class="container">
 
   <table class="table table-bordered">
@@ -35,18 +49,18 @@
     <tbody>
       {{#each rows}}
       <tr>
-        <th scope="row">{{this.serialID}}</th>
-        <th scope="row"></th>
+        <th scope="row">{{this.id}}</th>
+        <th scope="row">{{this.serialNumber}}</th>
         <td>{{this.productName}}</td>
         <td>{{this.currentState}}</td>
-        <td>{{this.dateCaptured}}</td>
+        <td>{{this.capturedDate}}</td>
         <td class="text-end">
 
-          <a href="/viewProduct/{{this.serialID}}" type="button" class="btn btn-primary btn-small"><i
+          <a href="/viewProduct/{{this.id}}" type="button" class="btn btn-primary btn-small"><i
               class="bi bi-eye">View</i></a>
-          <a href="/editProduct/{{this.serialID}}" type="button" class="btn btn-info btn-small"><i
+          <a href="/editProduct/{{this.id}}" type="button" class="btn btn-info btn-small"><i
               class="bi bi-pencil">Edit</i></a>
-          <a href="/{{this.serialID}}" type="button" class="btn btn-danger btn-small"><i
+          <a href="/{{this.id}}" type="button" class="btn btn-danger btn-small"><i
               class="bi bi-person-x">Delete</i></a>
 
         </td>

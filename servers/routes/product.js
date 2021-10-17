@@ -6,6 +6,7 @@ const router = express.Router();
 //Diffrenrt functions => Create,find, update, delete
 router.get('/', productController.view);
 router.post('/', productController.find);
+router.post('/', productController.findSerial);
 
 
 router.get('/addProduct', productController.formAdd);
