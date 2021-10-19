@@ -3,19 +3,14 @@ const exphbs = require('express-handlebars');
 const mqsql = require('mysql');
 require('dotenv').config();
 
-var favicon = require('serve-favicon')
-var path = require('path')
 
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use("/public", express.static('public'));
-app.use(favicon(path.join(__dirname, 'public/images', 'fav.ico')))
 app.use(express.urlencoded({extended:true}));
 
-//
-app.use('/favicon.ico', express.static('public/images/fav.ico'));
-//
+
 
 // Parse application/json
 app.use(express.json());
