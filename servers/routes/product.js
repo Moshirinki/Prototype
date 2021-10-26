@@ -17,6 +17,9 @@ router.post('/editProduct/:id', productController.update);
 
 router.get('/viewProduct/:id', productController.viewSingle);
 router.get('/:id', productController.delete);
+
+router.get('/reports',productController.report);
+
 //Router
 router.get('', (req, res) => {
     res.render('home');

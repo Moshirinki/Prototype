@@ -19,12 +19,12 @@
 </div>
 
 <div class="row">
-<div class="col-md-6">
+{{!-- <div class="col-md-6">
   <form class="d-flex" method="post" action="/" novalidate>
         <input class="form-control me-2" type="search" placeholder="Search by Serial Number" name="searchSerial" aria-label="Search">
         <button class="btn btn-dark" type="submit">GO</button>
       </form>
-</div>
+</div> --}}
 
 <div class="col-md-6">
    <form class="d-flex" method="post" action="/" novalidate>
@@ -34,40 +34,51 @@
 </div>
 </div>
 <div class="container">
-
   <table class="table table-bordered">
     <thead class="thead-dark">
       <tr>
-        
         <th scope="col">Serial Number</th>
         <th scope="col">Product Name</th>
         <th scope="col">Current State</th>
-        <th scope="col">Date Captured/Modified</th>
+        <th scope="col">Manufactured Date</th>
+        <th scope="col">Testing Date</th>
+        <th scope="col">Finished Date</th>
+        <th scope="col">Quality Check Date</th>
+        <th scope="col">Demolished Date</th>
+        <th scope="col">Sold Date</th>
+        <th scope="col">Repair Date</th>
+        <th scope="col">Mine</th>
+        <th scope="col">Mine Shaft</th>
+        <th scope="col">Mine Section</th>
         <th scope="col" class="text-end">Action</th>
       </tr>
     </thead>
     <tbody>
       {{#each rows}}
       <tr>
-        
         <th scope="row">{{this.serialNumber}}</th>
         <td>{{this.productName}}</td>
         <td>{{this.currentState}}</td>
-        <td>{{this.capturedDate}}</td>
+        <td>{{this.manufacturedDate}}</td>
+        <td>{{this.testingDate}}</td>
+        <td>{{this.finishedDate}}</td>
+        <td>{{this.qualityCheckDate}}</td>
+        <td>{{this.soldDate}}</td>
+        <td>{{this.demolishedDate}}</td>
+        <td>{{this.repairDate}}</td>
+        <td>{{this.mine}}</td>
+        <td>{{this.mineShaft}}</td>
+        <td>{{this.mineSection}}</td>
         <td class="text-end">
-
           <a href="/viewProduct/{{this.id}}" type="button" class="btn btn-primary btn-small"><i
               class="bi bi-eye">View</i></a>
           <a href="/editProduct/{{this.id}}" type="button" class="btn btn-info btn-small"><i
               class="bi bi-pencil">Edit</i></a>
           <a href="/{{this.id}}" type="button" class="btn btn-danger btn-small"><i
               class="bi bi-person-x">Delete</i></a>
-
         </td>
       </tr>
       {{/each}}
-
-
     </tbody>
   </table>
 </div>
